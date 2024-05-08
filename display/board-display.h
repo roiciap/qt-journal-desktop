@@ -1,8 +1,9 @@
 #ifndef BOARDDISPLAY_H
 #define BOARDDISPLAY_H
 
-#include <QWidget>
 #include "note-board-display.h"
+
+#include <QWidget>
 #include<vector>
 
 class BoardDisplay : public QWidget

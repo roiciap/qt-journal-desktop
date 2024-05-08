@@ -12,7 +12,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Quick QuickWidgets)
 
-qt_add_resources(QML_SOURCES qml-files.qrc)
+
+add_subdirectory(display)
+
+
 
 set(PROJECT_SOURCES
         main.cpp
@@ -25,12 +28,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(journal
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        qml-files.qrc
-        note-board-display.qml
-        ${QML_SOURCES}
-        note-board-display.h note-board-display.cpp
-        board-display.h board-display.cpp
         menu-widget.h menu-widget.cpp
+        ${QML_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET journal APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -50,7 +49,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(journal PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::QuickWidgets)
+target_link_libraries(journal PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::QuickWidgets display)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
