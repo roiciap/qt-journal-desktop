@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>note-board-display.qml</file>
+    </qresource>
+</RCC>
