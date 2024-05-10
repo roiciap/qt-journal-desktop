@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include "main-widget.h"
 #include "menu-widget.h"
-#include "display/board-display.h"
+#include "board_display/board-display.h"
+#include "display-switch.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -15,9 +17,9 @@ QT_END_NAMESPACE
 
 
 struct MainWindowWidgets {
-    QWidget  *mainWidget;
+    MainWidget  *mainWidget;
     MenuWidget *menu;
-    QStackedWidget *displayTarget;
+    DisplaySwitch *displayTarget;
     BoardDisplay *board;
 
     ~MainWindowWidgets(){

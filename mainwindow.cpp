@@ -1,33 +1,17 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include <QHBoxLayout>
 
 
 MainWindowWidgets* initializeMainWidgets(){
 // initialize main widget
-    QWidget  *mainWidget = new QWidget();
-    QPalette pal = QPalette();
-    pal.setColor(QPalette::Window, Qt::darkGray);
 
-    mainWidget->setAutoFillBackground(true);
-    mainWidget->setPalette(pal);
 
     BoardDisplay *board = new BoardDisplay();
-    MenuWidget *menu = new MenuWidget(mainWidget);
-    QStackedWidget *displayTarget = new QStackedWidget(mainWidget);
+    MenuWidget *menu = new MenuWidget();
+    DisplaySwitch *displayTarget = new DisplaySwitch();
 
-    QHBoxLayout *hLayout = new QHBoxLayout(mainWidget);
-    mainWidget->setLayout(hLayout);
-    // create current display target
-    hLayout->addWidget(displayTarget);
-    hLayout->setStretchFactor(displayTarget, 1);
-
-
-    displayTarget->addWidget(board);
-    displayTarget->setCurrentIndex(0);
-
-    hLayout->addWidget(menu);
-
+    // displayTarget->setTargetAndClear(board);
+    MainWidget  *mainWidget = new MainWidget(menu, displayTarget);
     return new MainWindowWidgets{
         mainWidget=mainWidget,
         menu=menu,
@@ -45,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
     // QVBoxLayout *vLayout = new QVBoxLayout();
 
     this->widgets = initializeMainWidgets();
-
 
     this->setCentralWidget(this->widgets->mainWidget);
 }

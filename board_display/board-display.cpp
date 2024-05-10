@@ -18,12 +18,6 @@ BoardDisplay::BoardDisplay(QWidget *parent)
 
     NoteBoardDisplay *note = new NoteBoardDisplay(this);
     this->notes.push_back(note);
-
-    // QHBoxLayout *hLayout = new QHBoxLayout(this);
-    // QVBoxLayout *vLayout = new QVBoxLayout();
-    // hLayout->addLayout(vLayout);
-    // vLayout->addWidget(note);
-    // this->setLayout(hLayout);
 }
 
 BoardDisplay::~BoardDisplay(){
