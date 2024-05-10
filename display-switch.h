@@ -8,6 +8,7 @@ class DisplaySwitch : public QStackedWidget
     Q_OBJECT
 public:
     explicit DisplaySwitch(QWidget *parent = nullptr);
+public slots:
     void setTargetAndClear(QWidget*);
 signals:
 };

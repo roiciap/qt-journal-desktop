@@ -18,7 +18,5 @@ MainWidget::MainWidget(MenuWidget* menu, DisplaySwitch* displayTarget)
     hLayout->addWidget(displayTarget);
     hLayout->setStretchFactor(displayTarget, 1);
     hLayout->addWidget(menu);
-
-
-
+    connect(menu, &MenuWidget::buttonLeftClick, displayTarget, &DisplaySwitch::setTargetAndClear);
 }

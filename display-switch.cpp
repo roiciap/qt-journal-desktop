@@ -7,8 +7,14 @@ DisplaySwitch::DisplaySwitch(QWidget *parent)
 }
 
 void DisplaySwitch::setTargetAndClear(QWidget *displayWidget){
-    for (int i=this->count(); 0<i; i++) {
-        this->removeWidget(this->widget(i));
+    auto cnt = this->count();
+    if(cnt!= 0){
+        auto a = this->widget(0);
+        this->removeWidget(a);
+        delete a;
     }
+
     this->addWidget(displayWidget);
 }
+
+

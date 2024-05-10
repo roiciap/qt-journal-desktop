@@ -10,10 +10,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Quick QuickWidgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets )
 
 
 add_subdirectory(board_display)
+add_subdirectory(scroll_display)
 
 
 
@@ -29,7 +30,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         menu-widget.h menu-widget.cpp
-        ${QML_SOURCES}
         main-widget.h main-widget.cpp
         display-switch.h
         display-switch.cpp
@@ -52,7 +52,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(journal PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::QuickWidgets board_display)
+target_link_libraries(journal PRIVATE Qt${QT_VERSION_MAJOR}::Widgets board_display scroll_display)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

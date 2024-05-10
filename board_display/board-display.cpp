@@ -3,6 +3,7 @@
 #include "note-board-display.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QMouseEvent>
 
 BoardDisplay::BoardDisplay(QWidget *parent)
     : QWidget{parent}
@@ -16,8 +17,8 @@ BoardDisplay::BoardDisplay(QWidget *parent)
     this->setAutoFillBackground(true);
     this->setPalette(pal);
 
-    NoteBoardDisplay *note = new NoteBoardDisplay(this);
-    this->notes.push_back(note);
+    this->addButton = new QPushButton(this);
+    connect(this->addButton, &QPushButton::clicked,this, &BoardDisplay::addNote);
 }
 
 BoardDisplay::~BoardDisplay(){
@@ -28,10 +29,21 @@ BoardDisplay::~BoardDisplay(){
 }
 
 
+
+void BoardDisplay::addNote(){
+    NoteBoardDisplay *note = new NoteBoardDisplay(this);
+    notes.push_back(note);
+    note->show();
+
+}
+
+
+
 void BoardDisplay::mousePressEvent(QMouseEvent *event){
     if (event->button() == Qt::RightButton) {
         // Zapisanie pozycji myszy w momencie naciśnięcia prawego przycisku
         lastMousePosition = event->globalPosition().toPoint();
+        isDragging=true;
         event->accept();
     } else {
         QWidget::mousePressEvent(event);
@@ -46,7 +58,7 @@ void moveAllNotes(int dx,int dy,std::vector<NoteBoardDisplay*> notes){
 }
 
 void BoardDisplay::mouseMoveEvent(QMouseEvent *event){
-    if (event->buttons() & Qt::RightButton) {
+    if (event->buttons() & Qt::RightButton && isDragging) {
         // Przesuwanie widgetu na podstawie różnicy pozycji myszy
         int dx = event->globalPosition().toPoint().x() - lastMousePosition.x();
         int dy = event->globalPosition().toPoint().y() - lastMousePosition.y();
@@ -58,11 +70,12 @@ void BoardDisplay::mouseMoveEvent(QMouseEvent *event){
     }
 }
 
+
 void BoardDisplay::mouseReleaseEvent(QMouseEvent *event){
     if (event->button() == Qt::RightButton) {
+        isDragging=false;
         event->accept();
     } else {
         QWidget::mouseReleaseEvent(event);
     }
 }
-

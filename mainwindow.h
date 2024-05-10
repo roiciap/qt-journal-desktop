@@ -5,8 +5,9 @@
 #include <QStackedWidget>
 #include "main-widget.h"
 #include "menu-widget.h"
-#include "board_display/board-display.h"
+// #include "board_display/board-display.h"
 #include "display-switch.h"
+// #include "scroll_display/scroll-display.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,13 +21,13 @@ struct MainWindowWidgets {
     MainWidget  *mainWidget;
     MenuWidget *menu;
     DisplaySwitch *displayTarget;
-    BoardDisplay *board;
+    // BoardDisplay *board;
+    // ScrollDisplay *scroll;
 
     ~MainWindowWidgets(){
         delete this->mainWidget;
         delete this->menu;
         delete this->displayTarget;
-        delete this->board;
     }
 };
 

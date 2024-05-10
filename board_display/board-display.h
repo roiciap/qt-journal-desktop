@@ -5,6 +5,8 @@
 
 #include <QWidget>
 #include<vector>
+#include<QPushButton>
+
 
 class BoardDisplay : public QWidget
 {
@@ -13,6 +15,9 @@ public:
     explicit BoardDisplay(QWidget *parent = nullptr);
 
     ~BoardDisplay();
+public slots:
+    void addNote();
+
 protected:
     void mousePressEvent(QMouseEvent *event) override;
 
@@ -21,8 +26,10 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
+    bool isDragging=false;
     QPoint lastMousePosition;
     std::vector<NoteBoardDisplay*> notes;
+    QPushButton* addButton;
 };
 
 #endif // BOARDDISPLAY_H
